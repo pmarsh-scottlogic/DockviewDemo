@@ -68,7 +68,6 @@ const headerComponents = {
 const DockviewDemo = (props: { theme?: string }) => {
 	const [api, setApi] = React.useState<DockviewApi>()
 
-	console.log('update values')
 	const panelIds = api?.panels.map((panel) => panel.id) ?? []
 	const groupIds = api?.groups.map((group) => group.id) ?? []
 	const activePanelId = api?.activePanel?.id
