@@ -55,7 +55,7 @@ export const RightControls = (props: IDockviewHeaderActionsProps) => {
 			disposable.dispose()
 			disposable2.dispose()
 		}
-	}, [props.containerApi])
+	}, [props.api, props.containerApi])
 
 	const onClick = () => {
 		if (props.containerApi.hasMaximizedGroup()) {
@@ -131,7 +131,7 @@ export const LeftControls = (props: IDockviewHeaderActionsProps) => {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const PrefixHeaderControls = (props: IDockviewHeaderActionsProps) => {
+export const PrefixHeaderControls = (_props: IDockviewHeaderActionsProps) => {
 	return (
 		<div
 			className="group-control"

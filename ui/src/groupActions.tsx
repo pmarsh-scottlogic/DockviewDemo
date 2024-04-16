@@ -7,12 +7,12 @@ export const GroupActions = (props: {
 }) => {
 	return (
 		<div className="action-container">
-			{props.groups.map((x) => {
+			{props.groups.map((x, index) => {
 				const onClick = () => {
 					props.api?.getGroup(x)?.focus()
 				}
 				return (
-					<div className="button-action">
+					<div className="button-action" key={x + index}>
 						<div style={{ display: 'flex' }}>
 							<button
 								onClick={onClick}

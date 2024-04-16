@@ -7,12 +7,12 @@ export const PanelActions = (props: {
 }) => {
 	return (
 		<div className="action-container">
-			{props.panels.map((x) => {
+			{props.panels.map((x, index) => {
 				const onClick = () => {
 					props.api?.getPanel(x)?.focus()
 				}
 				return (
-					<div className="button-action">
+					<div className="button-action" key={x + index}>
 						<div style={{ display: 'flex' }}>
 							<button
 								className={
