@@ -68,10 +68,10 @@ const headerComponents = {
 const DockviewDemo = (props: { theme?: string }) => {
 	const [api, setApi] = React.useState<DockviewApi>()
 
-	const [panels, setPanels] = React.useState<string[]>([])
-	const [groups, setGroups] = React.useState<string[]>([])
-	const [activePanel, setActivePanel] = React.useState<string>()
-	const [activeGroup, setActiveGroup] = React.useState<string>()
+	const [panelIds, setPanelIds] = React.useState<string[]>([])
+	const [groupIds, setGroupIds] = React.useState<string[]>([])
+	const [activePanelId, setActivePanelId] = React.useState<string>()
+	const [activeGroupId, setActiveGroupId] = React.useState<string>()
 
 	// const panelIds = api?.panels.map((panel) => panel.id) ?? []
 	// const groupIds = api?.groups.map((group) => group.id) ?? []
@@ -84,14 +84,14 @@ const DockviewDemo = (props: { theme?: string }) => {
 		// set event methods here. E.g:
 
 		event.api.onDidAddPanel((event) => {
-			setPanels((_) => [..._, event.id])
+			setPanelIds((panelIds) => [...panelIds, event.id])
 		})
 		event.api.onDidActivePanelChange((event) => {
-			setActivePanel(event?.id)
+			setActivePanelId(event?.id)
 		})
 		event.api.onDidRemovePanel((event) => {
-			setPanels((_) => {
-				const next = [..._]
+			setPanelIds((panelIds) => {
+				const next = [...panelIds]
 				next.splice(
 					next.findIndex((x) => x === event.id),
 					1
@@ -102,12 +102,12 @@ const DockviewDemo = (props: { theme?: string }) => {
 		})
 
 		event.api.onDidAddGroup((event) => {
-			setGroups((_) => [..._, event.id])
+			setGroupIds((groupIds) => [...groupIds, event.id])
 		})
 
 		event.api.onDidRemoveGroup((event) => {
-			setGroups((_) => {
-				const next = [..._]
+			setGroupIds((groupIds) => {
+				const next = [...groupIds]
 				next.splice(
 					next.findIndex((x) => x === event.id),
 					1
@@ -118,7 +118,7 @@ const DockviewDemo = (props: { theme?: string }) => {
 		})
 
 		event.api.onDidActiveGroupChange((event) => {
-			setActiveGroup(event?.id)
+			setActiveGroupId(event?.id)
 		})
 
 		// populate panels and groups from localStorage or defaultLayout
@@ -160,13 +160,13 @@ const DockviewDemo = (props: { theme?: string }) => {
 				<GridActions api={api} />
 				<PanelActions
 					api={api}
-					panels={panels}
-					activePanel={activePanel}
+					panels={panelIds}
+					activePanel={activePanelId}
 				/>
 				<GroupActions
 					api={api}
-					groups={groups}
-					activeGroup={activeGroup}
+					groups={groupIds}
+					activeGroup={activeGroupId}
 				/>
 			</div>
 			<div
