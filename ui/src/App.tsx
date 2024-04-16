@@ -73,6 +73,7 @@ const DockviewDemo = (props: { theme?: string }) => {
 	const [activePanelId, setActivePanelId] = useState<string>()
 	const [activeGroupId, setActiveGroupId] = useState<string>()
 
+	// I thought I could deduce these from the api state object. But they don't stay in sync when the Dock view updates (new panel/group added or deleted or selected)
 	// const panelIds = api?.panels.map((panel) => panel.id) ?? []
 	// const groupIds = api?.groups.map((group) => group.id) ?? []
 	// const activePanelId = api?.activePanel?.id
