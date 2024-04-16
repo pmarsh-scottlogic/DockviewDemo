@@ -76,6 +76,8 @@ const colors = [
 let count = 0
 
 const DockviewDemo = (props: { theme?: string }) => {
+	const isFirstRenderRef = React.useRef(true)
+
 	const [logLines, setLogLines] = React.useState<
 		{ text: string; timestamp?: Date; backgroundColor?: string }[]
 	>([])
@@ -157,8 +159,16 @@ const DockviewDemo = (props: { theme?: string }) => {
 			addLogLine(`Group Activated ${event?.id}`)
 		})
 
+		// populate from localStorage or defaultLayout
+
+		// prevent react strictmode from populating it twice
+		if (!isFirstRenderRef.current) return
+		console.log('is first render. current ref ', isFirstRenderRef.current)
+		isFirstRenderRef.current = false
+
 		const state = localStorage.getItem('dv-demo-state')
 		if (state) {
+			console.log('State from localStorage')
 			try {
 				event.api.fromJSON(JSON.parse(state))
 				return
