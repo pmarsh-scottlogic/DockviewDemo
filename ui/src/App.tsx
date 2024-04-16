@@ -106,7 +106,10 @@ const DockviewDemo = (props: { theme?: string }) => {
 		}
 		const color = colors[count++ % colors.length]
 		setLogLines((lines) => [
-			...pending.map((_) => ({ ..._, backgroundColor: color })),
+			...pending.map((pendingItem) => ({
+				...pendingItem,
+				backgroundColor: color,
+			})),
 			...lines,
 		])
 		setPending([])
@@ -116,7 +119,7 @@ const DockviewDemo = (props: { theme?: string }) => {
 		setApi(event.api)
 
 		event.api.onDidAddPanel((event) => {
-			setPanels((_) => [..._, event.id])
+			setPanels((panels) => [...panels, event.id])
 			addLogLine(`Panel Added ${event.id}`)
 		})
 		event.api.onDidActivePanelChange((event) => {
@@ -124,8 +127,8 @@ const DockviewDemo = (props: { theme?: string }) => {
 			addLogLine(`Panel Activated ${event?.id}`)
 		})
 		event.api.onDidRemovePanel((event) => {
-			setPanels((_) => {
-				const next = [..._]
+			setPanels((panels) => {
+				const next = [...panels]
 				next.splice(
 					next.findIndex((x) => x === event.id),
 					1
@@ -137,13 +140,13 @@ const DockviewDemo = (props: { theme?: string }) => {
 		})
 
 		event.api.onDidAddGroup((event) => {
-			setGroups((_) => [..._, event.id])
+			setGroups((groups) => [...groups, event.id])
 			addLogLine(`Group Added ${event.id}`)
 		})
 
 		event.api.onDidRemoveGroup((event) => {
-			setGroups((_) => {
-				const next = [..._]
+			setGroups((groups) => {
+				const next = [...groups]
 				next.splice(
 					next.findIndex((x) => x === event.id),
 					1
