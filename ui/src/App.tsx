@@ -116,10 +116,15 @@ const DockviewDemo = (props: { theme?: string }) => {
 	}, [pending])
 
 	const onReady = (event: DockviewReadyEvent) => {
+		// prevent react strictmode from populating it twice
+		if (!isFirstRenderRef.current) return
+		isFirstRenderRef.current = false
+
 		setApi(event.api)
 
 		event.api.onDidAddPanel((event) => {
 			setPanels((panels) => [...panels, event.id])
+			console.log('Panel added', event.id)
 			addLogLine(`Panel Added ${event.id}`)
 		})
 		event.api.onDidActivePanelChange((event) => {
@@ -163,10 +168,6 @@ const DockviewDemo = (props: { theme?: string }) => {
 		})
 
 		// populate from localStorage or defaultLayout
-
-		// prevent react strictmode from populating it twice
-		if (!isFirstRenderRef.current) return
-		isFirstRenderRef.current = false
 
 		console.log('loading state...')
 
