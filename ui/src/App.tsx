@@ -68,19 +68,58 @@ const headerComponents = {
 const DockviewDemo = (props: { theme?: string }) => {
 	const [api, setApi] = React.useState<DockviewApi>()
 
-	const panelIds = api?.panels.map((panel) => panel.id) ?? []
-	const groupIds = api?.groups.map((group) => group.id) ?? []
-	const activePanelId = api?.activePanel?.id
-	const activeGroupId = api?.activeGroup?.id
+	const [panels, setPanels] = React.useState<string[]>([])
+	const [groups, setGroups] = React.useState<string[]>([])
+	const [activePanel, setActivePanel] = React.useState<string>()
+	const [activeGroup, setActiveGroup] = React.useState<string>()
+
+	// const panelIds = api?.panels.map((panel) => panel.id) ?? []
+	// const groupIds = api?.groups.map((group) => group.id) ?? []
+	// const activePanelId = api?.activePanel?.id
+	// const activeGroupId = api?.activeGroup?.id
 
 	const onReady = (event: DockviewReadyEvent) => {
 		setApi(event.api)
 
 		// set event methods here. E.g:
-		// event.api.onDidAddPanel((event) => {
-		// 	console.log('Panel added', event.id)
-		// 	addLogLine(`Panel Added ${event.id}`)
-		// })
+
+		event.api.onDidAddPanel((event) => {
+			setPanels((_) => [..._, event.id])
+		})
+		event.api.onDidActivePanelChange((event) => {
+			setActivePanel(event?.id)
+		})
+		event.api.onDidRemovePanel((event) => {
+			setPanels((_) => {
+				const next = [..._]
+				next.splice(
+					next.findIndex((x) => x === event.id),
+					1
+				)
+
+				return next
+			})
+		})
+
+		event.api.onDidAddGroup((event) => {
+			setGroups((_) => [..._, event.id])
+		})
+
+		event.api.onDidRemoveGroup((event) => {
+			setGroups((_) => {
+				const next = [..._]
+				next.splice(
+					next.findIndex((x) => x === event.id),
+					1
+				)
+
+				return next
+			})
+		})
+
+		event.api.onDidActiveGroupChange((event) => {
+			setActiveGroup(event?.id)
+		})
 
 		// populate panels and groups from localStorage or defaultLayout
 
@@ -121,13 +160,13 @@ const DockviewDemo = (props: { theme?: string }) => {
 				<GridActions api={api} />
 				<PanelActions
 					api={api}
-					panels={panelIds}
-					activePanel={activePanelId}
+					panels={panels}
+					activePanel={activePanel}
 				/>
 				<GroupActions
 					api={api}
-					groups={groupIds}
-					activeGroup={activeGroupId}
+					groups={groups}
+					activeGroup={activeGroup}
 				/>
 			</div>
 			<div
