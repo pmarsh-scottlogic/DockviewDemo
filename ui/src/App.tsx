@@ -6,13 +6,13 @@ import {
 	IDockviewPanelProps,
 	DockviewApi,
 } from 'dockview'
-import * as React from 'react'
 import './app.scss'
 import { defaultConfig } from './defaultLayout'
 import { GridActions } from './gridActions'
 import { PanelActions } from './panelActions'
 import { GroupActions } from './groupActions'
 import { LeftControls, PrefixHeaderControls, RightControls } from './controls'
+import { useState } from 'react'
 
 const components = {
 	default: (props: IDockviewPanelProps) => {
@@ -66,12 +66,12 @@ const headerComponents = {
 }
 
 const DockviewDemo = (props: { theme?: string }) => {
-	const [api, setApi] = React.useState<DockviewApi>()
+	const [api, setApi] = useState<DockviewApi>()
 
-	const [panelIds, setPanelIds] = React.useState<string[]>([])
-	const [groupIds, setGroupIds] = React.useState<string[]>([])
-	const [activePanelId, setActivePanelId] = React.useState<string>()
-	const [activeGroupId, setActiveGroupId] = React.useState<string>()
+	const [panelIds, setPanelIds] = useState<string[]>([])
+	const [groupIds, setGroupIds] = useState<string[]>([])
+	const [activePanelId, setActivePanelId] = useState<string>()
+	const [activeGroupId, setActiveGroupId] = useState<string>()
 
 	// const panelIds = api?.panels.map((panel) => panel.id) ?? []
 	// const groupIds = api?.groups.map((group) => group.id) ?? []
