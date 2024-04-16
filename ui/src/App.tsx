@@ -65,87 +65,24 @@ const headerComponents = {
 	},
 }
 
-const colors = [
-	'rgba(255,0,0,0.2)',
-	'rgba(0,255,0,0.2)',
-	'rgba(0,0,255,0.2)',
-	'rgba(255,255,0,0.2)',
-	'rgba(0,255,255,0.2)',
-	'rgba(255,0,255,0.2)',
-]
-let count = 0
-
 const DockviewDemo = (props: { theme?: string }) => {
-	const isFirstRenderRef = React.useRef(true)
-
-	const [logLines, setLogLines] = React.useState<
-		{ text: string; timestamp?: Date; backgroundColor?: string }[]
-	>([])
-
 	const [api, setApi] = React.useState<DockviewApi>()
-
-	const [pending, setPending] = React.useState<
-		{ text: string; timestamp?: Date }[]
-	>([])
 
 	const panelIds = api?.panels.map((panel) => panel.id) ?? []
 	const groupIds = api?.groups.map((group) => group.id) ?? []
 	const activePanelId = api?.activePanel?.id
 	const activeGroupId = api?.activeGroup?.id
 
-	const addLogLine = (message: string) => {
-		setPending((line) => [
-			{ text: message, timestamp: new Date() },
-			...line,
-		])
-	}
-
-	React.useLayoutEffect(() => {
-		if (pending.length === 0) {
-			return
-		}
-		const color = colors[count++ % colors.length]
-		setLogLines((lines) => [
-			...pending.map((pendingItem) => ({
-				...pendingItem,
-				backgroundColor: color,
-			})),
-			...lines,
-		])
-		setPending([])
-	}, [pending])
-
 	const onReady = (event: DockviewReadyEvent) => {
-		// prevent react strictmode from populating it twice
-		if (!isFirstRenderRef.current) return
-		isFirstRenderRef.current = false
-
 		setApi(event.api)
 
-		event.api.onDidAddPanel((event) => {
-			console.log('Panel added', event.id)
-			addLogLine(`Panel Added ${event.id}`)
-		})
-		event.api.onDidActivePanelChange((event) => {
-			addLogLine(`Panel Activated ${event?.id}`)
-		})
-		event.api.onDidRemovePanel((event) => {
-			addLogLine(`Panel Removed ${event.id}`)
-		})
+		// set event methods here. E.g:
+		// event.api.onDidAddPanel((event) => {
+		// 	console.log('Panel added', event.id)
+		// 	addLogLine(`Panel Added ${event.id}`)
+		// })
 
-		event.api.onDidAddGroup((event) => {
-			addLogLine(`Group Added ${event.id}`)
-		})
-
-		event.api.onDidRemoveGroup((event) => {
-			addLogLine(`Group Removed ${event.id}`)
-		})
-
-		event.api.onDidActiveGroupChange((event) => {
-			addLogLine(`Group Activated ${event?.id}`)
-		})
-
-		// populate from localStorage or defaultLayout
+		// populate panels and groups from localStorage or defaultLayout
 
 		console.log('loading state...')
 
@@ -210,61 +147,6 @@ const DockviewDemo = (props: { theme?: string }) => {
 					onReady={onReady}
 					className={props.theme || 'dockview-theme-abyss'}
 				/>
-				<div
-					style={{
-						width: '300px',
-						backgroundColor: 'black',
-						color: 'white',
-						overflow: 'auto',
-					}}
-				>
-					{logLines.map((line, i) => {
-						return (
-							<div
-								style={{
-									height: '30px',
-									overflow: 'hidden',
-									textOverflow: 'ellipsis',
-									whiteSpace: 'nowrap',
-									fontSize: '13px',
-									display: 'flex',
-									alignItems: 'center',
-									backgroundColor: line.backgroundColor,
-								}}
-								key={i}
-							>
-								<span
-									style={{
-										display: 'inline-block',
-										width: '20px',
-										color: 'gray',
-										borderRight: '1px solid gray',
-										marginRight: '4px',
-										paddingLeft: '2px',
-										height: '100%',
-									}}
-								>
-									{logLines.length - i}
-								</span>
-								<span>
-									{line.timestamp && (
-										<span
-											style={{
-												fontSize: '0.7em',
-												padding: '0px 2px',
-											}}
-										>
-											{line.timestamp
-												.toISOString()
-												.substring(11, 23)}
-										</span>
-									)}
-									<span>{line.text}</span>
-								</span>
-							</div>
-						)
-					})}
-				</div>
 			</div>
 		</div>
 	)
