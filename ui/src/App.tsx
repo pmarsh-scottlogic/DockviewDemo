@@ -82,16 +82,16 @@ const DockviewDemo = (props: { theme?: string }) => {
 		{ text: string; timestamp?: Date; backgroundColor?: string }[]
 	>([])
 
-	const [panels, setPanels] = React.useState<string[]>([])
-	const [groups, setGroups] = React.useState<string[]>([])
 	const [api, setApi] = React.useState<DockviewApi>()
-
-	const [activePanel, setActivePanel] = React.useState<string>()
-	const [activeGroup, setActiveGroup] = React.useState<string>()
 
 	const [pending, setPending] = React.useState<
 		{ text: string; timestamp?: Date }[]
 	>([])
+
+	const panelIds = api?.panels.map((panel) => panel.id) ?? []
+	const groupIds = api?.groups.map((group) => group.id) ?? []
+	const activePanelId = api?.activePanel?.id
+	const activeGroupId = api?.activeGroup?.id
 
 	const addLogLine = (message: string) => {
 		setPending((line) => [
@@ -123,47 +123,25 @@ const DockviewDemo = (props: { theme?: string }) => {
 		setApi(event.api)
 
 		event.api.onDidAddPanel((event) => {
-			setPanels((panels) => [...panels, event.id])
 			console.log('Panel added', event.id)
 			addLogLine(`Panel Added ${event.id}`)
 		})
 		event.api.onDidActivePanelChange((event) => {
-			setActivePanel(event?.id)
 			addLogLine(`Panel Activated ${event?.id}`)
 		})
 		event.api.onDidRemovePanel((event) => {
-			setPanels((panels) => {
-				const next = [...panels]
-				next.splice(
-					next.findIndex((x) => x === event.id),
-					1
-				)
-
-				return next
-			})
 			addLogLine(`Panel Removed ${event.id}`)
 		})
 
 		event.api.onDidAddGroup((event) => {
-			setGroups((groups) => [...groups, event.id])
 			addLogLine(`Group Added ${event.id}`)
 		})
 
 		event.api.onDidRemoveGroup((event) => {
-			setGroups((groups) => {
-				const next = [...groups]
-				next.splice(
-					next.findIndex((x) => x === event.id),
-					1
-				)
-
-				return next
-			})
 			addLogLine(`Group Removed ${event.id}`)
 		})
 
 		event.api.onDidActiveGroupChange((event) => {
-			setActiveGroup(event?.id)
 			addLogLine(`Group Activated ${event?.id}`)
 		})
 
@@ -206,13 +184,13 @@ const DockviewDemo = (props: { theme?: string }) => {
 				<GridActions api={api} />
 				<PanelActions
 					api={api}
-					panels={panels}
-					activePanel={activePanel}
+					panels={panelIds}
+					activePanel={activePanelId}
 				/>
 				<GroupActions
 					api={api}
-					groups={groups}
-					activeGroup={activeGroup}
+					groups={groupIds}
+					activeGroup={activeGroupId}
 				/>
 			</div>
 			<div
