@@ -200,7 +200,6 @@ const DockviewDemo = (props: { theme?: string }) => {
 				style={{
 					flexGrow: 1,
 					overflow: 'hidden',
-					// flexBasis: 0
 					height: 0,
 					display: 'flex',
 				}}
@@ -216,7 +215,6 @@ const DockviewDemo = (props: { theme?: string }) => {
 				/>
 				<div
 					style={{
-						// height: '200px',
 						width: '300px',
 						backgroundColor: 'black',
 						color: 'white',
