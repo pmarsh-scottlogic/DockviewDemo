@@ -163,22 +163,27 @@ const DockviewDemo = (props: { theme?: string }) => {
 
 		// prevent react strictmode from populating it twice
 		if (!isFirstRenderRef.current) return
-		console.log('is first render. current ref ', isFirstRenderRef.current)
 		isFirstRenderRef.current = false
+
+		console.log('loading state...')
 
 		const state = localStorage.getItem('dv-demo-state')
 		if (state) {
-			console.log('State from localStorage')
 			try {
 				event.api.fromJSON(JSON.parse(state))
+				console.log('Dockview state loaded from localStorage')
 				return
 			} catch {
 				localStorage.removeItem('dv-demo-state')
+				console.log(
+					'There was a problem loading Dockview state from localStorage'
+				)
 			}
 			return
 		}
 
 		defaultConfig(event.api)
+		console.log('Dockview state loaded from defaultConfig')
 	}
 
 	return (
