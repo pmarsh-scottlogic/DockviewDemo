@@ -1,9 +1,9 @@
 import { TodoItem } from '../types'
-import './DisplayList.scss'
+import './ListDisplayer.scss'
 
 const Separator = () => <span className="separator">{'|'}</span>
 
-function DisplayList({
+function ListDisplayer({
 	todoItems,
 	toggleTodoItemCompleteness,
 }: {
@@ -36,4 +36,4 @@ function DisplayList({
 	)
 }
 
-export default DisplayList
+export default ListDisplayer
