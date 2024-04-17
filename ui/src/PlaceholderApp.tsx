@@ -52,12 +52,7 @@ function PlaceholderApp() {
 		)
 	}
 
-	function addTodoItemToList(title: string, location: string, dueDate: Date) {
-		const newItem = {
-			title,
-			location,
-			dueDate,
-		} as TodoItem
+	function addTodoItemToList(newItem: TodoItem) {
 		setTodoItems((todoItems) => [...todoItems, newItem])
 	}
 
