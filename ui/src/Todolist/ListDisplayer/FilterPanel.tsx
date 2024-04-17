@@ -27,7 +27,7 @@ function FilterPanel({
 	setFilters: React.Dispatch<React.SetStateAction<Filters>>
 	todoItems: TodoItem[]
 }) {
-	const toDoChecked =
+	const todoChecked =
 		filters.completedness === 'to do' ||
 		filters.completedness === 'complete or to do'
 	const completeChecked =
@@ -39,11 +39,11 @@ function FilterPanel({
 	)
 
 	function handleChangeToDoCheckbox() {
-		const toDoNowChecked = !toDoChecked
+		const todoNowChecked = !todoChecked
 		setFilters((filters) => ({
 			...filters,
 			completedness: determineCompletedness(
-				toDoNowChecked,
+				todoNowChecked,
 				completeChecked
 			),
 		}))
@@ -54,7 +54,7 @@ function FilterPanel({
 		setFilters((filters) => ({
 			...filters,
 			completedness: determineCompletedness(
-				toDoChecked,
+				todoChecked,
 				completeNowChecked
 			),
 		}))
@@ -72,7 +72,7 @@ function FilterPanel({
 						to do
 						<input
 							type="checkbox"
-							defaultChecked={toDoChecked}
+							defaultChecked={todoChecked}
 							onChange={handleChangeToDoCheckbox}
 						/>
 					</label>
