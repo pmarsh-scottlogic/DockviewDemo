@@ -24,9 +24,11 @@ function DisplayList({
 					<p>
 						<span className="title">{todoItem.title}</span>
 						<Separator />
-						<span>{todoItem.location}</span>
+						<span className="location">{todoItem.location}</span>
 						<Separator />
-						<span>{todoItem.dueDate.toDateString()}</span>
+						<span className="date">
+							{todoItem.dueDate.toDateString()}
+						</span>
 					</p>
 				</li>
 			))}
