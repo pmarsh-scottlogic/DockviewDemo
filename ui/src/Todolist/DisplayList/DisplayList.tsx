@@ -1,4 +1,4 @@
-import { TodoItem } from './types'
+import { TodoItem } from '../types'
 import './DisplayList.scss'
 
 const Separator = () => <span className="separator">{'|'}</span>

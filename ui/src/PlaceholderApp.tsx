@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Placeholder.css'
 import { TodoItem } from './Todolist/types'
-import DisplayList from './Todolist/DisplayList'
+import DisplayList from './Todolist/DisplayList/DisplayList'
 
 const PLACEHOLDER_TODO_ITEMS = [
 	{
