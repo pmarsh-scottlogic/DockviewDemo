@@ -40,18 +40,6 @@ function ListDisplayer({
 	)
 	return (
 		<section className="listDisplayer">
-			<button
-				onClick={() => setShowFilters((showFilters) => !showFilters)}
-			>
-				{showFilters ? 'Hide filters' : 'Show filters'}
-			</button>
-			{/* {showFilters && <FilterPanel />} */}
-			<FilterPanel
-				filters={filters}
-				setFilters={setFilters}
-				todoItems={todoItems}
-			/>
-
 			<ul>
 				{filteredTodoItems.map((todoItem) => (
 					<li key={getTodoItemId(todoItem)}>
@@ -76,6 +64,22 @@ function ListDisplayer({
 					</li>
 				))}
 			</ul>
+			<div className="filterArea">
+				<button
+					onClick={() =>
+						setShowFilters((showFilters) => !showFilters)
+					}
+				>
+					{showFilters ? 'Hide filters' : 'Show filters'}
+				</button>
+				{showFilters && (
+					<FilterPanel
+						filters={filters}
+						setFilters={setFilters}
+						todoItems={todoItems}
+					/>
+				)}
+			</div>
 		</section>
 	)
 }
