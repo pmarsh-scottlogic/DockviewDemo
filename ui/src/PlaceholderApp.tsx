@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './Placeholder.css'
 import { TodoItem } from './Todolist/types'
+import DisplayList from './Todolist/DisplayList'
 
 const PLACEHOLDER_TODO_ITEMS = [
 	{
@@ -42,11 +43,7 @@ function PlaceholderApp() {
 	return (
 		<section>
 			<h1>To do list</h1>
-			<ul>
-				{todoItems.map((todoItem, index) => (
-					<li key={index}>{todoItem.title}</li>
-				))}
-			</ul>
+			<DisplayList todoItems={todoItems} />
 		</section>
 	)
 }
