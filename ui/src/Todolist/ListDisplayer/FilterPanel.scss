@@ -1,2 +1,18 @@
 .filterPanel {
+	display: flex;
+
+	div.labels,
+	div.inputs {
+		display: flex;
+		flex-direction: column;
+	}
+
+	div.labels {
+		margin-right: 1rem;
+	}
+
+	div.inputs completednessPanel {
+		display: flex;
+		flex-direction: row;
+	}
 }
