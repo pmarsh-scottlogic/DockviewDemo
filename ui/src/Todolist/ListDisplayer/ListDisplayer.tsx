@@ -17,7 +17,7 @@ function ListDisplayer({
 					<label>
 						<input
 							type="checkbox"
-							checked={todoItem.complete}
+							defaultChecked={todoItem.complete}
 							onClick={() =>
 								toggleTodoItemCompleteness(todoItem.title)
 							}
