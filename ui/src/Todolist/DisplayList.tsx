@@ -14,14 +14,14 @@ function DisplayList({
 		<ul>
 			{todoItems.map((todoItem, index) => (
 				<li key={index}>
-					<input
-						type="checkbox"
-						checked={todoItem.complete}
-						onClick={() =>
-							toggleTodoItemCompleteness(todoItem.title)
-						}
-					/>
-					<p>
+					<label>
+						<input
+							type="checkbox"
+							checked={todoItem.complete}
+							onClick={() =>
+								toggleTodoItemCompleteness(todoItem.title)
+							}
+						/>
 						<span className="title">{todoItem.title}</span>
 						<Separator />
 						<span className="location">{todoItem.location}</span>
@@ -29,7 +29,7 @@ function DisplayList({
 						<span className="date">
 							{todoItem.dueDate.toDateString()}
 						</span>
-					</p>
+					</label>
 				</li>
 			))}
 		</ul>
