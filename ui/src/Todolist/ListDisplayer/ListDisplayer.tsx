@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Filters, TodoItem } from '../types'
+import { Filters, TodoItem, getTodoItemId } from '../types'
 import './ListDisplayer.scss'
 import FilterPanel from './FilterPanel'
 
@@ -37,8 +37,8 @@ function ListDisplayer({
 			<FilterPanel filters={filters} setFilters={setFilters} />
 
 			<ul>
-				{filteredTodoItems.map((todoItem, index) => (
-					<li key={index}>
+				{filteredTodoItems.map((todoItem) => (
+					<li key={getTodoItemId(todoItem)}>
 						<label>
 							<input
 								type="checkbox"
