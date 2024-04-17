@@ -52,6 +52,15 @@ function PlaceholderApp() {
 		)
 	}
 
+	function addTodoItemToList(title: string, location: string, dueDate: Date) {
+		const newItem = {
+			title,
+			location,
+			dueDate,
+		} as TodoItem
+		setTodoItems((todoItems) => [...todoItems, newItem])
+	}
+
 	return (
 		<>
 			<section>
@@ -63,7 +72,7 @@ function PlaceholderApp() {
 			</section>
 			<section>
 				<h2>Item Adder</h2>
-				<ItemAdder />
+				<ItemAdder addTodoItemToList={addTodoItemToList} />
 			</section>
 		</>
 	)

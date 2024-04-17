@@ -1,6 +1,10 @@
 import './ItemAdder.scss'
 
-function ItemAdder() {
+function ItemAdder({
+	addTodoItemToList,
+}: {
+	addTodoItemToList: (title: string, location: string, dueDate: Date) => void
+}) {
 	return (
 		<div>
 			<table>
@@ -18,7 +22,13 @@ function ItemAdder() {
 				</tr>
 			</table>
 
-			<button>Add to list</button>
+			<button
+				onClick={() =>
+					addTodoItemToList('fake', 'location', new Date(Date.now()))
+				}
+			>
+				Add to list
+			</button>
 		</div>
 	)
 }
