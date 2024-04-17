@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { TodoItem } from '../types'
 import './ListDisplayer.scss'
 
+type filters = {
+	completedness: 'done' | 'not done' | 'done or not done'
+}
+
 const Separator = () => <span className="separator">{'|'}</span>
 
 function ListDisplayer({
@@ -12,6 +16,17 @@ function ListDisplayer({
 	toggleTodoItemCompleteness: (title: string) => void
 }) {
 	const [showFilters, setShowFilters] = useState(false)
+	const [filters, setFilters] = useState<filters>({
+		completedness: 'done or not done',
+	})
+
+	const filteredTodoItems = todoItems.filter((todoItem) =>
+		filters.completedness === 'done'
+			? todoItem.complete
+			: filters.completedness === 'not done'
+			? !todoItem.complete
+			: true
+	)
 	return (
 		<section className="listDisplayer">
 			<button
@@ -22,7 +37,7 @@ function ListDisplayer({
 			{showFilters && <div className="filters">hey</div>}
 
 			<ul>
-				{todoItems.map((todoItem, index) => (
+				{filteredTodoItems.map((todoItem, index) => (
 					<li key={index}>
 						<label>
 							<input
