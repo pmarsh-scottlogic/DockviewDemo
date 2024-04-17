@@ -14,13 +14,13 @@ function ListDisplayer({
 }) {
 	const [showFilters, setShowFilters] = useState(false)
 	const [filters, setFilters] = useState<Filters>({
-		completedness: 'done or not done',
+		completedness: 'complete or to do',
 	})
 
 	const filteredTodoItems = todoItems.filter((todoItem) =>
-		filters.completedness === 'done'
+		filters.completedness === 'complete'
 			? todoItem.complete
-			: filters.completedness === 'not done'
+			: filters.completedness === 'to do'
 			? !todoItem.complete
 			: true
 	)

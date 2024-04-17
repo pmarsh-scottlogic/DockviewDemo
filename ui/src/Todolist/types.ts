@@ -6,7 +6,7 @@ type TodoItem = {
 }
 
 type Filters = {
-	completedness: 'done' | 'not done' | 'done or not done'
+	completedness: 'complete' | 'to do' | 'complete or to do'
 }
 
 export type { TodoItem, Filters }
