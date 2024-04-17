@@ -1,6 +1,19 @@
 import { Completedness, Filters } from '../types'
 import './FilterPanel.scss'
 
+function determineCompletedness(
+	toDoChecked: boolean,
+	completeChecked: boolean
+): Completedness {
+	return toDoChecked && completeChecked
+		? 'complete or to do'
+		: toDoChecked && !completeChecked
+		? 'to do'
+		: !toDoChecked && completeChecked
+		? 'complete'
+		: 'neither'
+}
+
 function FilterPanel({
 	filters,
 	setFilters,
@@ -17,28 +30,24 @@ function FilterPanel({
 
 	function handleChangeToDoCheckbox() {
 		const toDoNowChecked = !toDoChecked
-		const completedness: Completedness =
-			toDoNowChecked && completeChecked
-				? 'complete or to do'
-				: toDoNowChecked && !completeChecked
-				? 'to do'
-				: !toDoNowChecked && completeChecked
-				? 'complete'
-				: 'neither'
-		setFilters((filters) => ({ ...filters, completedness }))
+		setFilters((filters) => ({
+			...filters,
+			completedness: determineCompletedness(
+				toDoNowChecked,
+				completeChecked
+			),
+		}))
 	}
 
 	function handleChangeCompleteCheckbox() {
 		const completeNowChecked = !completeChecked
-		const completedness: Completedness =
-			toDoChecked && completeNowChecked
-				? 'complete or to do'
-				: toDoChecked && !completeNowChecked
-				? 'to do'
-				: !toDoChecked && completeNowChecked
-				? 'complete'
-				: 'neither'
-		setFilters((filters) => ({ ...filters, completedness }))
+		setFilters((filters) => ({
+			...filters,
+			completedness: determineCompletedness(
+				toDoChecked,
+				completeNowChecked
+			),
+		}))
 	}
 
 	return (
