@@ -6,7 +6,7 @@ function ItemAdder({
 	addTodoItemToList: (title: string, location: string, dueDate: Date) => void
 }) {
 	return (
-		<div>
+		<section className="itemAdder">
 			<div className="form">
 				<div className="labels">
 					<label htmlFor="title">Title</label>
@@ -26,7 +26,7 @@ function ItemAdder({
 			>
 				Add to list
 			</button>
-		</div>
+		</section>
 	)
 }
 
