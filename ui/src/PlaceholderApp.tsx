@@ -63,17 +63,11 @@ function PlaceholderApp() {
 
 	return (
 		<>
-			<section>
-				<h2>To do list</h2>
-				<ListDisplayer
-					todoItems={todoItems}
-					toggleTodoItemCompleteness={toggleTodoItemCompleteness}
-				/>
-			</section>
-			<section>
-				<h2>Item Adder</h2>
-				<ItemAdder addTodoItemToList={addTodoItemToList} />
-			</section>
+			<ListDisplayer
+				todoItems={todoItems}
+				toggleTodoItemCompleteness={toggleTodoItemCompleteness}
+			/>
+			<ItemAdder addTodoItemToList={addTodoItemToList} />
 		</>
 	)
 }

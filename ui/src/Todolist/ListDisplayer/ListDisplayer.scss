@@ -1,29 +1,31 @@
-ul {
-	text-align: left;
-	list-style-type: none;
+section.listDisplayer {
+	ul {
+		text-align: left;
+		list-style-type: none;
 
-	li {
-		display: flex;
+		li {
+			display: flex;
 
-		input {
-			margin-right: 0.75rem;
-		}
+			input {
+				margin-right: 0.75rem;
+			}
 
-		.title {
-			font-weight: bold;
-		}
+			.title {
+				font-weight: bold;
+			}
 
-		.separator {
-			margin: 0 0.5rem;
-		}
+			.separator {
+				margin: 0 0.5rem;
+			}
 
-		.location {
-			font-style: italic;
-			color: grey;
-		}
+			.location {
+				font-style: italic;
+				color: grey;
+			}
 
-		.date {
-			color: gray;
+			.date {
+				color: gray;
+			}
 		}
 	}
 }
