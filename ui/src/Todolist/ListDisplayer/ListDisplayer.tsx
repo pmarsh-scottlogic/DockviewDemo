@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { TodoItem } from '../types'
 import './ListDisplayer.scss'
+import FilterPanel from './FilterPanel'
 
 type filters = {
 	completedness: 'done' | 'not done' | 'done or not done'
@@ -34,7 +35,8 @@ function ListDisplayer({
 			>
 				{showFilters ? 'Hide filters' : 'Show filters'}
 			</button>
-			{showFilters && <div className="filters">hey</div>}
+			{/* {showFilters && <FilterPanel />} */}
+			<FilterPanel />
 
 			<ul>
 				{filteredTodoItems.map((todoItem, index) => (
