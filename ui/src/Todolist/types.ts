@@ -6,7 +6,9 @@ type TodoItem = {
 }
 
 type Filters = {
-	completedness: 'complete' | 'to do' | 'complete or to do'
+	completedness: Completedness
 }
 
-export type { TodoItem, Filters }
+type Completedness = 'complete' | 'to do' | 'complete or to do' | 'neither'
+
+export type { TodoItem, Filters, Completedness }
