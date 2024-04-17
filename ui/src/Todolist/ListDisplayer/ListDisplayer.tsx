@@ -23,6 +23,8 @@ function ListDisplayer({
 			: filters.completedness === 'to do'
 			? !todoItem.complete
 			: filters.completedness === 'complete or to do'
+			? true
+			: false
 	)
 	return (
 		<section className="listDisplayer">
