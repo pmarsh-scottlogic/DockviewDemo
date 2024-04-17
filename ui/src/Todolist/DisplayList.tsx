@@ -3,12 +3,24 @@ import './DisplayList.scss'
 
 const Separator = () => <span className="separator">{'|'}</span>
 
-function DisplayList({ todoItems }: { todoItems: TodoItem[] }) {
+function DisplayList({
+	todoItems,
+	toggleTodoItemCompleteness,
+}: {
+	todoItems: TodoItem[]
+	toggleTodoItemCompleteness: (title: string) => void
+}) {
 	return (
 		<ul>
 			{todoItems.map((todoItem, index) => (
 				<li key={index}>
-					<input type="checkbox" checked={todoItem.complete} />
+					<input
+						type="checkbox"
+						checked={todoItem.complete}
+						onClick={() =>
+							toggleTodoItemCompleteness(todoItem.title)
+						}
+					/>
 					<p>
 						<span className="title">{todoItem.title}</span>
 						<Separator />

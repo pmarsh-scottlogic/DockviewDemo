@@ -40,10 +40,24 @@ function PlaceholderApp() {
 	const [todoItems, setTodoItems] = useState<TodoItem[]>(
 		PLACEHOLDER_TODO_ITEMS
 	)
+
+	function toggleTodoItemCompleteness(title: string) {
+		setTodoItems((todoItems) =>
+			todoItems.map((todoItem) =>
+				todoItem.title === title
+					? { ...todoItem, complete: !todoItem.complete }
+					: todoItem
+			)
+		)
+	}
+
 	return (
 		<section>
 			<h1>To do list</h1>
-			<DisplayList todoItems={todoItems} />
+			<DisplayList
+				todoItems={todoItems}
+				toggleTodoItemCompleteness={toggleTodoItemCompleteness}
+			/>
 		</section>
 	)
 }
