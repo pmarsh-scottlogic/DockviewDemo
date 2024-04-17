@@ -5,4 +5,8 @@ type TodoItem = {
 	dueDate: Date
 }
 
-export type { TodoItem }
+type Filters = {
+	completedness: 'done' | 'not done' | 'done or not done'
+}
+
+export type { TodoItem, Filters }

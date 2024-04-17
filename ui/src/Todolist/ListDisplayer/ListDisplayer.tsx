@@ -1,11 +1,7 @@
 import { useState } from 'react'
-import { TodoItem } from '../types'
+import { Filters, TodoItem } from '../types'
 import './ListDisplayer.scss'
 import FilterPanel from './FilterPanel'
-
-type filters = {
-	completedness: 'done' | 'not done' | 'done or not done'
-}
 
 const Separator = () => <span className="separator">{'|'}</span>
 
@@ -17,7 +13,7 @@ function ListDisplayer({
 	toggleTodoItemCompleteness: (title: string) => void
 }) {
 	const [showFilters, setShowFilters] = useState(false)
-	const [filters, setFilters] = useState<filters>({
+	const [filters, setFilters] = useState<Filters>({
 		completedness: 'done or not done',
 	})
 
@@ -36,7 +32,7 @@ function ListDisplayer({
 				{showFilters ? 'Hide filters' : 'Show filters'}
 			</button>
 			{/* {showFilters && <FilterPanel />} */}
-			<FilterPanel />
+			<FilterPanel filters={filters} setFilters={setFilters} />
 
 			<ul>
 				{filteredTodoItems.map((todoItem, index) => (

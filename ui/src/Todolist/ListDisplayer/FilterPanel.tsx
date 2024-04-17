@@ -1,6 +1,14 @@
+import { useState } from 'react'
+import { Filters } from '../types'
 import './FilterPanel.scss'
 
-function FilterPanel() {
+function FilterPanel({
+	filters,
+	setFilters,
+}: {
+	filters: Filters
+	setFilters: React.Dispatch<React.SetStateAction<Filters>>
+}) {
 	return (
 		<div className="filterPanel">
 			<div className="labels">
@@ -11,11 +19,11 @@ function FilterPanel() {
 				<div className="completednessPanel">
 					<label>
 						to do
-						<input type="checkbox" />
+						<input type="checkbox" defaultChecked={true} />
 					</label>
 					<label>
 						complete
-						<input type="checkbox" />
+						<input type="checkbox" defaultChecked={true} />
 					</label>
 				</div>
 			</div>
