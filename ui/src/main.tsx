@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
 import 'dockview/dist/styles/dockview.css'
 import './styles.css'
+import PlaceholderApp from './PlaceholderApp.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
 		<div className="app">
-			<App />
+			<PlaceholderApp />
 		</div>
 	</React.StrictMode>
 )
