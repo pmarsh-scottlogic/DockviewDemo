@@ -5,6 +5,23 @@ import FilterPanel from './FilterPanel'
 
 const Separator = () => <span className="separator">{'|'}</span>
 
+function todoItemShouldBeIncluded(todoItem: TodoItem, filters: Filters) {
+	const completeItemsIncluded =
+		filters.completedness === 'complete' ||
+		filters.completedness === 'complete or to do'
+	const todoItemsIncluded =
+		filters.completedness === 'to do' ||
+		filters.completedness === 'complete or to do'
+
+	const correctCompletedness =
+		(completeItemsIncluded && todoItem.complete) ||
+		(todoItemsIncluded && !todoItem.complete)
+	const correctLocation =
+		filters.location === 'any' || filters.location === todoItem.location
+
+	return correctCompletedness && correctLocation
+}
+
 function ListDisplayer({
 	todoItems,
 	toggleTodoItemCompleteness,
@@ -15,16 +32,11 @@ function ListDisplayer({
 	const [showFilters, setShowFilters] = useState(false)
 	const [filters, setFilters] = useState<Filters>({
 		completedness: 'complete or to do',
+		location: 'any',
 	})
 
 	const filteredTodoItems = todoItems.filter((todoItem) =>
-		filters.completedness === 'complete'
-			? todoItem.complete
-			: filters.completedness === 'to do'
-			? !todoItem.complete
-			: filters.completedness === 'complete or to do'
-			? true
-			: false
+		todoItemShouldBeIncluded(todoItem, filters)
 	)
 	return (
 		<section className="listDisplayer">
@@ -34,7 +46,11 @@ function ListDisplayer({
 				{showFilters ? 'Hide filters' : 'Show filters'}
 			</button>
 			{/* {showFilters && <FilterPanel />} */}
-			<FilterPanel filters={filters} setFilters={setFilters} />
+			<FilterPanel
+				filters={filters}
+				setFilters={setFilters}
+				todoItems={todoItems}
+			/>
 
 			<ul>
 				{filteredTodoItems.map((todoItem) => (

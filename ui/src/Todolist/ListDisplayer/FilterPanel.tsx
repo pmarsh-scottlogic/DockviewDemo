@@ -1,4 +1,4 @@
-import { Completedness, Filters } from '../types'
+import { Completedness, Filters, TodoItem } from '../types'
 import './FilterPanel.scss'
 
 function determineCompletedness(
@@ -14,12 +14,18 @@ function determineCompletedness(
 		: 'neither'
 }
 
+function getUniqueEntries<T>(arr: T[]) {
+	return [...new Set(arr)]
+}
+
 function FilterPanel({
 	filters,
 	setFilters,
+	todoItems,
 }: {
 	filters: Filters
 	setFilters: React.Dispatch<React.SetStateAction<Filters>>
+	todoItems: TodoItem[]
 }) {
 	const toDoChecked =
 		filters.completedness === 'to do' ||
@@ -27,6 +33,10 @@ function FilterPanel({
 	const completeChecked =
 		filters.completedness === 'complete' ||
 		filters.completedness === 'complete or to do'
+
+	const locationOptions = ['any'].concat(
+		getUniqueEntries(todoItems.map((todoItem) => todoItem.location))
+	)
 
 	function handleChangeToDoCheckbox() {
 		const toDoNowChecked = !toDoChecked
@@ -54,7 +64,7 @@ function FilterPanel({
 		<div className="filterPanel">
 			<div className="labels">
 				<label>completedness</label>
-				<label>location</label>
+				<label htmlFor="location">location</label>
 			</div>
 			<div className="inputs">
 				<div className="completednessPanel">
@@ -75,6 +85,20 @@ function FilterPanel({
 						/>
 					</label>
 				</div>
+				<select
+					id="location"
+					defaultValue={locationOptions[0]}
+					onChange={(event) =>
+						setFilters((filters) => ({
+							...filters,
+							location: event.target.value,
+						}))
+					}
+				>
+					{locationOptions.map((locationOption) => (
+						<option value={locationOption}>{locationOption}</option>
+					))}
+				</select>
 			</div>
 		</div>
 	)

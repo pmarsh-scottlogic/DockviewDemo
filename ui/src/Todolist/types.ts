@@ -11,6 +11,7 @@ function getTodoItemId(todoItem: TodoItem) {
 
 type Filters = {
 	completedness: Completedness
+	location: string
 }
 
 type Completedness = 'complete' | 'to do' | 'complete or to do' | 'neither'
