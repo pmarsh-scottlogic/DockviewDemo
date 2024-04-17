@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { TodoItem } from '../types'
 import './ListDisplayer.scss'
 
@@ -10,8 +11,16 @@ function ListDisplayer({
 	todoItems: TodoItem[]
 	toggleTodoItemCompleteness: (title: string) => void
 }) {
+	const [showFilters, setShowFilters] = useState(false)
 	return (
 		<section className="listDisplayer">
+			<button
+				onClick={() => setShowFilters((showFilters) => !showFilters)}
+			>
+				{showFilters ? 'Hide filters' : 'Show filters'}
+			</button>
+			{showFilters && <div className="filters">hey</div>}
+
 			<ul>
 				{todoItems.map((todoItem, index) => (
 					<li key={index}>
