@@ -3,7 +3,6 @@ import {
 	DockviewReact,
 	DockviewReadyEvent,
 	IDockviewPanelHeaderProps,
-	IDockviewPanelProps,
 	DockviewApi,
 } from 'dockview'
 import './app.scss'
@@ -17,48 +16,7 @@ import {
 	RightControls,
 } from './Dockview/GroupHeaderControls'
 import { useState } from 'react'
-import ComponentChooser from './Dockview/ComponentChooser'
-
-const components = {
-	componentChooser: ComponentChooser,
-	default: (props: IDockviewPanelProps) => {
-		return (
-			<div
-				style={{
-					height: '100%',
-					overflow: 'auto',
-					color: 'white',
-					position: 'relative',
-				}}
-			>
-				<span
-					style={{
-						position: 'absolute',
-						top: '50%',
-						left: '50%',
-						transform: 'translate(-50%,-50%)',
-						pointerEvents: 'none',
-						fontSize: '42px',
-						opacity: 0.5,
-					}}
-				>
-					{props.api.title}
-				</span>
-			</div>
-		)
-	},
-	iframe: () => {
-		return (
-			<iframe
-				style={{
-					width: '100%',
-					height: '100%',
-				}}
-				src="https://dockview.dev"
-			/>
-		)
-	},
-}
+import { components } from './Dockview/Components'
 
 const headerComponents = {
 	default: (props: IDockviewPanelHeaderProps) => {

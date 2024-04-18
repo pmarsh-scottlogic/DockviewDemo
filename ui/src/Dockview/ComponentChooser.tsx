@@ -1,29 +1,36 @@
 import { IDockviewPanelProps } from 'dockview'
+import { components } from './Components'
 
 export default function ComponentChooser(props: IDockviewPanelProps) {
+	const componentsToExclude = ['componentChooser']
+	const componentsToChoose = Object.keys(components).filter(
+		(component) => !componentsToExclude.includes(component)
+	)
 	return (
 		<div>
 			<ul>
-				<li>
-					<button
-						onClick={() => {
-							// add new panel
-							props.containerApi.addPanel({
-								id: `id_${Date.now().toString()}`,
-								component: 'default',
-								title: `Tab ${`id_${Date.now().toString()}`}`,
-								position: {
-									referenceGroup: props.api.group,
-								},
-							})
+				{componentsToChoose.map((component) => (
+					<li key={`option-${component}`}>
+						<button
+							onClick={() => {
+								// add new panel
+								props.containerApi.addPanel({
+									id: `id_${Date.now().toString()}`,
+									component: component,
+									title: `Tab ${`id_${Date.now().toString()}`}`,
+									position: {
+										referenceGroup: props.api.group,
+									},
+								})
 
-							// remove this panel
-							props.api.close()
-						}}
-					>
-						default
-					</button>
-				</li>
+								// remove this panel
+								props.api.close()
+							}}
+						>
+							{component}
+						</button>
+					</li>
+				))}
 			</ul>
 		</div>
 	)
