@@ -7,11 +7,15 @@ import {
 	DockviewApi,
 } from 'dockview'
 import './app.scss'
-import { onePanelConfig } from './defaultLayouts'
-import { GridActions } from './gridActions'
-import { PanelActions } from './panelActions'
-import { GroupActions } from './groupActions'
-import { LeftControls, PrefixHeaderControls, RightControls } from './controls'
+import { onePanelConfig } from './Dockview/defaultLayouts'
+import { GridActions } from './Dockview/gridActions'
+import { PanelActions } from './Dockview/panelActions'
+import { GroupActions } from './Dockview/groupActions'
+import {
+	LeftControls,
+	PrefixHeaderControls,
+	RightControls,
+} from './Dockview/controls'
 import { useState } from 'react'
 
 const components = {
