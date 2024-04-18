@@ -17,36 +17,10 @@ import {
 	RightControls,
 } from './Dockview/GroupHeaderControls'
 import { useState } from 'react'
+import ComponentChooser from './Dockview/ComponentChooser'
 
 const components = {
-	componentChooser: (props: IDockviewPanelProps) => {
-		return (
-			<div>
-				<ul>
-					<li>
-						<button
-							onClick={() => {
-								// add new panel
-								props.containerApi.addPanel({
-									id: `id_${Date.now().toString()}`,
-									component: 'default',
-									title: `Tab ${`id_${Date.now().toString()}`}`,
-									position: {
-										referenceGroup: props.api.group,
-									},
-								})
-
-								// remove this panel
-								props.api.close()
-							}}
-						>
-							default
-						</button>
-					</li>
-				</ul>
-			</div>
-		)
-	},
+	componentChooser: ComponentChooser,
 	default: (props: IDockviewPanelProps) => {
 		return (
 			<div
