@@ -1,6 +1,6 @@
 import { IDockviewHeaderActionsProps } from 'dockview'
-import * as React from 'react'
 import { nextId } from './defaultLayouts'
+import { useEffect, useMemo, useState } from 'react'
 
 const Icon = (props: {
 	icon: string
@@ -26,7 +26,7 @@ const groupControlsComponents: Record<string, React.FC> = {
 }
 
 export const RightControls = (props: IDockviewHeaderActionsProps) => {
-	const Component = React.useMemo(() => {
+	const Component = useMemo(() => {
 		if (!props.isGroupActive || !props.activePanel) {
 			return null
 		}
@@ -34,15 +34,15 @@ export const RightControls = (props: IDockviewHeaderActionsProps) => {
 		return groupControlsComponents[props.activePanel.id]
 	}, [props.isGroupActive, props.activePanel])
 
-	const [isMaximized, setIsMaximized] = React.useState<boolean>(
+	const [isMaximized, setIsMaximized] = useState<boolean>(
 		props.containerApi.hasMaximizedGroup()
 	)
 
-	const [isPopout, setIsPopout] = React.useState<boolean>(
+	const [isPopout, setIsPopout] = useState<boolean>(
 		props.api.location.type === 'popout'
 	)
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const disposable = props.containerApi.onDidMaximizedGroupChange(() => {
 			setIsMaximized(props.containerApi.hasMaximizedGroup())
 		})
@@ -57,7 +57,7 @@ export const RightControls = (props: IDockviewHeaderActionsProps) => {
 		}
 	}, [props.api, props.containerApi])
 
-	const onClick = () => {
+	const toggleMaximised = () => {
 		if (props.containerApi.hasMaximizedGroup()) {
 			props.containerApi.exitMaximizedGroup()
 		} else {
@@ -65,7 +65,7 @@ export const RightControls = (props: IDockviewHeaderActionsProps) => {
 		}
 	}
 
-	const onClick2 = () => {
+	const togglePopout = () => {
 		if (props.api.location.type !== 'popout') {
 			props.containerApi.addPopoutGroup(props.group)
 		} else {
@@ -89,13 +89,13 @@ export const RightControls = (props: IDockviewHeaderActionsProps) => {
 			<Icon
 				title={isPopout ? 'Close Window' : 'Open In New Window'}
 				icon={isPopout ? 'close_fullscreen' : 'open_in_new'}
-				onClick={onClick2}
+				onClick={togglePopout}
 			/>
 			{!isPopout && (
 				<Icon
 					title={isMaximized ? 'Minimize View' : 'Maximize View'}
 					icon={isMaximized ? 'collapse_content' : 'expand_content'}
-					onClick={onClick}
+					onClick={toggleMaximised}
 				/>
 			)}
 		</div>
