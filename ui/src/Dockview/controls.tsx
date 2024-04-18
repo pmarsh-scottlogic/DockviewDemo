@@ -1,6 +1,6 @@
 import { IDockviewHeaderActionsProps } from 'dockview'
 import { nextId } from './defaultLayouts'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const IconButton = (props: {
 	icon: string
@@ -19,21 +19,7 @@ const IconButton = (props: {
 	)
 }
 
-const activeGroupControlsComponents: Record<string, React.FC> = {
-	panel_1: () => {
-		return <IconButton icon="file_download" />
-	},
-}
-
 export const RightControls = (props: IDockviewHeaderActionsProps) => {
-	const ActiveGroupControls = useMemo(() => {
-		if (!props.isGroupActive || !props.activePanel) {
-			return null
-		}
-
-		return activeGroupControlsComponents[props.activePanel.id]
-	}, [props.isGroupActive, props.activePanel])
-
 	const [isMaximized, setIsMaximized] = useState<boolean>(
 		props.containerApi.hasMaximizedGroup()
 	)
@@ -84,7 +70,6 @@ export const RightControls = (props: IDockviewHeaderActionsProps) => {
 				color: 'var(--dv-activegroup-visiblepanel-tab-color)',
 			}}
 		>
-			{ActiveGroupControls && <ActiveGroupControls />}
 			<IconButton
 				title={isPopout ? 'Close Window' : 'Open In New Window'}
 				icon={isPopout ? 'close_fullscreen' : 'open_in_new'}
@@ -142,7 +127,7 @@ export const PrefixHeaderControls = (_props: IDockviewHeaderActionsProps) => {
 				color: 'var(--dv-activegroup-visiblepanel-tab-color)',
 			}}
 		>
-			<IconButton icon="Menu" />
+			{/* <IconButton icon="Menu" /> */}
 		</div>
 	)
 }
