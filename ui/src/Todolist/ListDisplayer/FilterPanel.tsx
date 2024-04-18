@@ -96,7 +96,9 @@ function FilterPanel({
 					}
 				>
 					{locationOptions.map((locationOption) => (
-						<option value={locationOption}>{locationOption}</option>
+						<option key={locationOption} value={locationOption}>
+							{locationOption}
+						</option>
 					))}
 				</select>
 			</div>
