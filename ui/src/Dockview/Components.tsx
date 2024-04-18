@@ -3,7 +3,8 @@ import ComponentChooser from './ComponentChooser'
 
 export const components = {
 	componentChooser: ComponentChooser,
-	default: (props: IDockviewPanelProps) => {
+	default: ComponentChooser,
+	boringPanel: (props: IDockviewPanelProps) => {
 		return (
 			<div
 				style={{
