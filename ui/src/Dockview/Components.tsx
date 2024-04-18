@@ -1,7 +1,7 @@
 import { IDockviewPanelProps } from 'dockview'
 import ComponentChooser from './ComponentChooser'
 
-export const components = {
+export const components = () => ({
 	componentChooser: ComponentChooser,
 	default: ComponentChooser,
 	emptyPanel: (props: IDockviewPanelProps) => {
@@ -41,4 +41,4 @@ export const components = {
 			/>
 		)
 	},
-}
+})
