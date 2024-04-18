@@ -37,12 +37,13 @@ export type TodoApi = {
 }
 
 const App = (props: { theme?: string }) => {
-	// todo list stuff
+	// ========== todo list stuff ==========
 	const [todoItems, setTodoItems] = useState<TodoItem[]>(
 		PLACEHOLDER_TODO_ITEMS
 	)
 
 	function toggleTodoItemCompleteness(title: string) {
+		console.log('toggling completeness of ', title)
 		setTodoItems((todoItems) =>
 			todoItems.map((todoItem) =>
 				todoItem.title === title
