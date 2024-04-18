@@ -29,7 +29,7 @@ const headerComponents = {
 }
 
 const App = (props: { theme?: string }) => {
-	const [api, setApi] = useState<DockviewApi>()
+	const [dockviewApi, setDockviewApi] = useState<DockviewApi>()
 
 	const [panelIds, setPanelIds] = useState<string[]>([])
 	const [groupIds, setGroupIds] = useState<string[]>([])
@@ -43,7 +43,7 @@ const App = (props: { theme?: string }) => {
 	// const activeGroupId = api?.activeGroup?.id
 
 	const onReady = (event: DockviewReadyEvent) => {
-		setApi(event.api)
+		setDockviewApi(event.api)
 
 		// set event methods here. E.g:
 
@@ -121,16 +121,16 @@ const App = (props: { theme?: string }) => {
 			}}
 		>
 			<div>
-				<GlobalActions api={api} />
+				<GlobalActions api={dockviewApi} />
 				{false && ( //hidden for now
 					<>
 						<PanelActions
-							api={api}
+							api={dockviewApi}
 							panels={panelIds}
 							activePanel={activePanelId}
 						/>
 						<GroupActions
-							api={api}
+							api={dockviewApi}
 							groups={groupIds}
 							activeGroup={activeGroupId}
 						/>
