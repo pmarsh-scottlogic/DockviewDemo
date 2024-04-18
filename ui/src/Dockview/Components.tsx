@@ -4,7 +4,7 @@ import ComponentChooser from './ComponentChooser'
 export const components = {
 	componentChooser: ComponentChooser,
 	default: ComponentChooser,
-	boringPanel: (props: IDockviewPanelProps) => {
+	emptyPanel: (props: IDockviewPanelProps) => {
 		return (
 			<div
 				style={{
@@ -30,14 +30,14 @@ export const components = {
 			</div>
 		)
 	},
-	iframe: () => {
+	wordle: () => {
 		return (
 			<iframe
 				style={{
 					width: '100%',
 					height: '100%',
 				}}
-				src="https://dockview.dev"
+				src="https://www.nytimes.com/games/wordle/index.html"
 			/>
 		)
 	},
