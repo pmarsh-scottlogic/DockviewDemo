@@ -8,7 +8,7 @@ import {
 } from 'dockview'
 import './app.scss'
 import { onePanelConfig } from './Dockview/defaultLayouts'
-import { GridActions } from './Dockview/gridActions'
+import { MainActions } from './Dockview/mainActions'
 import { PanelActions } from './Dockview/panelActions'
 import { GroupActions } from './Dockview/groupActions'
 import {
@@ -162,7 +162,7 @@ const DockviewDemo = (props: { theme?: string }) => {
 			}}
 		>
 			<div>
-				<GridActions api={api} />
+				<MainActions api={api} />
 				{false && ( //hidden for now
 					<>
 						<PanelActions

@@ -2,13 +2,14 @@ import { DockviewApi } from 'dockview'
 import { complexConfig, nextId } from './defaultLayouts'
 import { useState } from 'react'
 
-export const GridActions = (props: { api?: DockviewApi }) => {
+export const MainActions = (props: { api?: DockviewApi }) => {
 	const [showHeaders, setShowHeaders] = useState(true)
 
 	function toggleShowHeaders() {
 		setShowHeaders((showHeaders) => !showHeaders)
+		const nextShowHeaders = !showHeaders
 		props.api?.groups.forEach(
-			(group) => (group.header.hidden = !showHeaders)
+			(group) => (group.header.hidden = !nextShowHeaders)
 		)
 	}
 
