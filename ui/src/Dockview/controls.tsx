@@ -19,19 +19,19 @@ const Icon = (props: {
 	)
 }
 
-const groupControlsComponents: Record<string, React.FC> = {
+const activeGroupControlsComponents: Record<string, React.FC> = {
 	panel_1: () => {
 		return <Icon icon="file_download" />
 	},
 }
 
 export const RightControls = (props: IDockviewHeaderActionsProps) => {
-	const Component = useMemo(() => {
+	const ActiveGroupControls = useMemo(() => {
 		if (!props.isGroupActive || !props.activePanel) {
 			return null
 		}
 
-		return groupControlsComponents[props.activePanel.id]
+		return activeGroupControlsComponents[props.activePanel.id]
 	}, [props.isGroupActive, props.activePanel])
 
 	const [isMaximized, setIsMaximized] = useState<boolean>(
@@ -57,7 +57,7 @@ export const RightControls = (props: IDockviewHeaderActionsProps) => {
 		}
 	}, [props.api, props.containerApi])
 
-	const toggleMaximised = () => {
+	const toggleGroupIsMaximised = () => {
 		if (props.containerApi.hasMaximizedGroup()) {
 			props.containerApi.exitMaximizedGroup()
 		} else {
@@ -65,7 +65,7 @@ export const RightControls = (props: IDockviewHeaderActionsProps) => {
 		}
 	}
 
-	const togglePopout = () => {
+	const toggleGroupIsPopout = () => {
 		if (props.api.location.type !== 'popout') {
 			props.containerApi.addPopoutGroup(props.group)
 		} else {
@@ -85,17 +85,17 @@ export const RightControls = (props: IDockviewHeaderActionsProps) => {
 			}}
 		>
 			{props.isGroupActive && <Icon icon="star" />}
-			{Component && <Component />}
+			{ActiveGroupControls && <ActiveGroupControls />}
 			<Icon
 				title={isPopout ? 'Close Window' : 'Open In New Window'}
 				icon={isPopout ? 'close_fullscreen' : 'open_in_new'}
-				onClick={togglePopout}
+				onClick={toggleGroupIsPopout}
 			/>
 			{!isPopout && (
 				<Icon
 					title={isMaximized ? 'Minimize View' : 'Maximize View'}
 					icon={isMaximized ? 'collapse_content' : 'expand_content'}
-					onClick={toggleMaximised}
+					onClick={toggleGroupIsMaximised}
 				/>
 			)}
 		</div>
