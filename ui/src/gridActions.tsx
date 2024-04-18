@@ -1,5 +1,5 @@
 import { DockviewApi } from 'dockview'
-import { defaultConfig, nextId } from './defaultLayout'
+import { complexConfig, nextId } from './defaultLayouts'
 
 export const GridActions = (props: { api?: DockviewApi }) => {
 	const onClear = () => {
@@ -29,7 +29,7 @@ export const GridActions = (props: { api?: DockviewApi }) => {
 	const onReset = () => {
 		if (props.api) {
 			props.api.clear()
-			defaultConfig(props.api)
+			complexConfig(props.api)
 		}
 	}
 

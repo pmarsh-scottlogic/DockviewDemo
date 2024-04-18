@@ -1,6 +1,6 @@
 import { DockviewApi } from 'dockview'
 
-export const nextId = (() => {
+const nextId = (() => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	let counter = 0
 
@@ -9,7 +9,7 @@ export const nextId = (() => {
 	}
 })()
 
-export function defaultConfig(api: DockviewApi) {
+function complexConfig(api: DockviewApi) {
 	const panel1 = api.addPanel({
 		id: 'panel_1',
 		component: 'default',
@@ -68,3 +68,16 @@ export function defaultConfig(api: DockviewApi) {
 
 	panel1.api.setActive()
 }
+
+function onePanelConfig(api: DockviewApi) {
+	const panel1 = api.addPanel({
+		id: 'panel_1',
+		component: 'default',
+		renderer: 'always',
+		title: 'Panel 1',
+	})
+
+	panel1.api.setActive()
+}
+
+export { onePanelConfig, complexConfig, nextId }

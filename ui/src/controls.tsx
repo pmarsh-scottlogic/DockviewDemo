@@ -1,6 +1,6 @@
 import { IDockviewHeaderActionsProps } from 'dockview'
 import * as React from 'react'
-import { nextId } from './defaultLayout'
+import { nextId } from './defaultLayouts'
 
 const Icon = (props: {
 	icon: string

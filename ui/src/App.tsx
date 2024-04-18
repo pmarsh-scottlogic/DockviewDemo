@@ -7,7 +7,7 @@ import {
 	DockviewApi,
 } from 'dockview'
 import './app.scss'
-import { defaultConfig } from './defaultLayout'
+import { onePanelConfig } from './defaultLayouts'
 import { GridActions } from './gridActions'
 import { PanelActions } from './panelActions'
 import { GroupActions } from './groupActions'
@@ -141,7 +141,7 @@ const DockviewDemo = (props: { theme?: string }) => {
 			return
 		}
 
-		defaultConfig(event.api)
+		onePanelConfig(event.api)
 		console.log('Dockview state loaded from defaultConfig')
 	}
 
