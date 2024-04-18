@@ -1,7 +1,17 @@
 import { DockviewApi } from 'dockview'
 import { complexConfig, nextId } from './defaultLayouts'
+import { useState } from 'react'
 
 export const GridActions = (props: { api?: DockviewApi }) => {
+	const [showHeaders, setShowHeaders] = useState(true)
+
+	function toggleShowHeaders() {
+		setShowHeaders((showHeaders) => !showHeaders)
+		props.api?.groups.forEach(
+			(group) => (group.header.hidden = !showHeaders)
+		)
+	}
+
 	const onClear = () => {
 		props.api?.clear()
 	}
@@ -65,6 +75,14 @@ export const GridActions = (props: { api?: DockviewApi }) => {
 			<button className="text-button" onClick={onReset}>
 				Reset
 			</button>
+			<label>
+				Show headers
+				<input
+					type="checkbox"
+					defaultChecked={showHeaders}
+					onChange={toggleShowHeaders}
+				/>
+			</label>
 		</div>
 	)
 }
