@@ -56,6 +56,10 @@ export const GlobalActions = (props: { api?: DockviewApi }) => {
 		props.api?.addGroup()
 	}
 
+	const onTransform = () => {
+		props.api?.activePanel?.setTitle('james')
+	}
+
 	return (
 		<div className="action-container">
 			<button className="text-button" onClick={onAddPanel}>
@@ -84,6 +88,9 @@ export const GlobalActions = (props: { api?: DockviewApi }) => {
 					onChange={toggleShowHeaders}
 				/>
 			</label>
+			<button className="text-button" onClick={onTransform}>
+				transform
+			</button>
 		</div>
 	)
 }

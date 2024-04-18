@@ -8,17 +8,45 @@ import {
 } from 'dockview'
 import './app.scss'
 import { onePanelConfig } from './Dockview/defaultLayouts'
-import { MainActions } from './Dockview/mainActions'
+import { GlobalActions } from './Dockview/GlobalActions'
 import { PanelActions } from './Dockview/panelActions'
 import { GroupActions } from './Dockview/groupActions'
 import {
 	LeftControls,
 	PrefixHeaderControls,
 	RightControls,
-} from './Dockview/controls'
+} from './Dockview/GroupHeaderControls'
 import { useState } from 'react'
 
 const components = {
+	componentChooser: (props: IDockviewPanelProps) => {
+		return (
+			<div>
+				<ul>
+					<li>
+						<button
+							onClick={() => {
+								// add new panel
+								props.containerApi.addPanel({
+									id: `id_${Date.now().toString()}`,
+									component: 'default',
+									title: `Tab ${`id_${Date.now().toString()}`}`,
+									position: {
+										referenceGroup: props.api.group,
+									},
+								})
+
+								// remove this panel
+								props.api.close()
+							}}
+						>
+							default
+						</button>
+					</li>
+				</ul>
+			</div>
+		)
+	},
 	default: (props: IDockviewPanelProps) => {
 		return (
 			<div
@@ -161,7 +189,7 @@ const DockviewDemo = (props: { theme?: string }) => {
 			}}
 		>
 			<div>
-				<MainActions api={api} />
+				<GlobalActions api={api} />
 				{false && ( //hidden for now
 					<>
 						<PanelActions

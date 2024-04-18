@@ -72,7 +72,7 @@ function complexConfig(api: DockviewApi) {
 function onePanelConfig(api: DockviewApi) {
 	const panel1 = api.addPanel({
 		id: 'panel_1',
-		component: 'default',
+		component: 'componentChooser',
 		renderer: 'always',
 		title: 'Panel 1',
 	})
