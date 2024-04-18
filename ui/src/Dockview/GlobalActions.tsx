@@ -2,7 +2,7 @@ import { DockviewApi } from 'dockview'
 import { complexConfig, nextId } from './defaultLayouts'
 import { useState } from 'react'
 
-export const MainActions = (props: { api?: DockviewApi }) => {
+export const GlobalActions = (props: { api?: DockviewApi }) => {
 	const [showHeaders, setShowHeaders] = useState(true)
 
 	function toggleShowHeaders() {
