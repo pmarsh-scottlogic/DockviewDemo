@@ -29,7 +29,6 @@ const components = {
 					position: 'relative',
 				}}
 			>
-				{/* <Table data={metadata} /> */}
 				<span
 					style={{
 						position: 'absolute',
