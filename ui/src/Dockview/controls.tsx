@@ -102,7 +102,7 @@ export const RightControls = (props: IDockviewHeaderActionsProps) => {
 }
 
 export const LeftControls = (props: IDockviewHeaderActionsProps) => {
-	const onClick = () => {
+	const addNewPanel = () => {
 		props.containerApi.addPanel({
 			id: `id_${Date.now().toString()}`,
 			component: 'default',
@@ -124,7 +124,7 @@ export const LeftControls = (props: IDockviewHeaderActionsProps) => {
 				color: 'var(--dv-activegroup-visiblepanel-tab-color)',
 			}}
 		>
-			<Icon onClick={onClick} icon="add" />
+			<Icon onClick={addNewPanel} icon="add" />
 		</div>
 	)
 }
