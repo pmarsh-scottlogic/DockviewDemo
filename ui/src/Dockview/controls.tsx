@@ -2,26 +2,26 @@ import { IDockviewHeaderActionsProps } from 'dockview'
 import { nextId } from './defaultLayouts'
 import { useEffect, useMemo, useState } from 'react'
 
-const Icon = (props: {
+const IconButton = (props: {
 	icon: string
 	title?: string
 	onClick?: (event: React.MouseEvent) => void
 }) => {
 	return (
-		<div title={props.title} className="action" onClick={props.onClick}>
+		<button title={props.title} className="action" onClick={props.onClick}>
 			<span
 				style={{ fontSize: 'inherit' }}
 				className="material-symbols-outlined"
 			>
 				{props.icon}
 			</span>
-		</div>
+		</button>
 	)
 }
 
 const activeGroupControlsComponents: Record<string, React.FC> = {
 	panel_1: () => {
-		return <Icon icon="file_download" />
+		return <IconButton icon="file_download" />
 	},
 }
 
@@ -85,13 +85,13 @@ export const RightControls = (props: IDockviewHeaderActionsProps) => {
 			}}
 		>
 			{ActiveGroupControls && <ActiveGroupControls />}
-			<Icon
+			<IconButton
 				title={isPopout ? 'Close Window' : 'Open In New Window'}
 				icon={isPopout ? 'close_fullscreen' : 'open_in_new'}
 				onClick={toggleGroupIsPopout}
 			/>
 			{!isPopout && (
-				<Icon
+				<IconButton
 					title={isMaximized ? 'Minimize View' : 'Maximize View'}
 					icon={isMaximized ? 'collapse_content' : 'expand_content'}
 					onClick={toggleGroupIsMaximised}
@@ -124,7 +124,7 @@ export const LeftControls = (props: IDockviewHeaderActionsProps) => {
 				color: 'var(--dv-activegroup-visiblepanel-tab-color)',
 			}}
 		>
-			<Icon onClick={addNewPanel} icon="add" />
+			<IconButton onClick={addNewPanel} icon="add" />
 		</div>
 	)
 }
@@ -142,7 +142,7 @@ export const PrefixHeaderControls = (_props: IDockviewHeaderActionsProps) => {
 				color: 'var(--dv-activegroup-visiblepanel-tab-color)',
 			}}
 		>
-			<Icon icon="Menu" />
+			<IconButton icon="Menu" />
 		</div>
 	)
 }

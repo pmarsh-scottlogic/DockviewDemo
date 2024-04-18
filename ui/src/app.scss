@@ -8,6 +8,12 @@
 		font-size: 18px;
 		cursor: pointer;
 
+		// copy from div.group-control
+		height: 80%;
+		color: var(--dv-activegroup-visiblepanel-tab-color);
+		background-color: var(--dv-tabs-and-actions-container-background-color);
+		border: none;
+
 		&:hover {
 			border-radius: 2px;
 			background-color: var(--dv-icon-hover-background-color);
