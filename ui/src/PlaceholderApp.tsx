@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Placeholder.css'
 import { TodoItem } from './Todolist/types'
-import ListDisplayer from './Todolist/ListDisplayer/ListDisplayer'
+import TodoListDisplayer from './Todolist/ListDisplayer/ListDisplayer'
 import ItemAdder from './Todolist/ItemAdder/ItemAdder'
 import PLACEHOLDER_TODO_ITEMS from './Todolist/placeholderItems'
 
@@ -26,7 +26,7 @@ function PlaceholderApp() {
 
 	return (
 		<>
-			<ListDisplayer
+			<TodoListDisplayer
 				todoItems={todoItems}
 				toggleTodoItemCompleteness={toggleTodoItemCompleteness}
 			/>

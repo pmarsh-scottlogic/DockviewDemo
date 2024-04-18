@@ -30,6 +30,12 @@ const headerComponents = {
 	},
 }
 
+export type TodoApi = {
+	todoItems: TodoItem[]
+	toggleTodoItemCompleteness: (title: string) => void
+	addTodoItemToList: (newItem: TodoItem) => void
+}
+
 const App = (props: { theme?: string }) => {
 	// todo list stuff
 	const [todoItems, setTodoItems] = useState<TodoItem[]>(
@@ -48,6 +54,12 @@ const App = (props: { theme?: string }) => {
 
 	function addTodoItemToList(newItem: TodoItem) {
 		setTodoItems((todoItems) => [...todoItems, newItem])
+	}
+
+	const todoApi: TodoApi = {
+		todoItems,
+		toggleTodoItemCompleteness,
+		addTodoItemToList,
 	}
 
 	// dockview stuff
@@ -168,7 +180,7 @@ const App = (props: { theme?: string }) => {
 				}}
 			>
 				<DockviewReact
-					components={components()}
+					components={components(todoApi)}
 					defaultTabComponent={headerComponents.default}
 					rightHeaderActionsComponent={RightControls}
 					leftHeaderActionsComponent={LeftControls}
