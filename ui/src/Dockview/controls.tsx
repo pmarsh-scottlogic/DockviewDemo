@@ -84,7 +84,6 @@ export const RightControls = (props: IDockviewHeaderActionsProps) => {
 				color: 'var(--dv-activegroup-visiblepanel-tab-color)',
 			}}
 		>
-			{props.isGroupActive && <Icon icon="star" />}
 			{ActiveGroupControls && <ActiveGroupControls />}
 			<Icon
 				title={isPopout ? 'Close Window' : 'Open In New Window'}
