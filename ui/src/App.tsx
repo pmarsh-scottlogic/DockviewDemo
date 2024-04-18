@@ -28,7 +28,7 @@ const headerComponents = {
 	},
 }
 
-const DockviewDemo = (props: { theme?: string }) => {
+const App = (props: { theme?: string }) => {
 	const [api, setApi] = useState<DockviewApi>()
 
 	const [panelIds, setPanelIds] = useState<string[]>([])
@@ -159,4 +159,4 @@ const DockviewDemo = (props: { theme?: string }) => {
 	)
 }
 
-export default DockviewDemo
+export default App
