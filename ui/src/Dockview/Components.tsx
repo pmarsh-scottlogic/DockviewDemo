@@ -1,10 +1,9 @@
 import { IDockviewPanelProps } from 'dockview'
 import ComponentChooser from './ComponentChooser'
-import { TodoApi } from '../App'
 import ListDisplayer from '../Todolist/ListDisplayer/ListDisplayer'
 import ItemAdder from '../Todolist/ItemAdder/ItemAdder'
 
-export const components = (todoApi: TodoApi) => ({
+export const components = {
 	componentChooser: ComponentChooser,
 	default: ComponentChooser,
 	emptyPanel: (props: IDockviewPanelProps) => {
@@ -44,13 +43,6 @@ export const components = (todoApi: TodoApi) => ({
 			/>
 		)
 	},
-	todoListDisplayer: () => (
-		<ListDisplayer
-			todoItems={todoApi.todoItems}
-			toggleTodoItemCompleteness={todoApi.toggleTodoItemCompleteness}
-		/>
-	),
-	todoItemAdder: () => (
-		<ItemAdder addTodoItemToList={todoApi.addTodoItemToList} />
-	),
-})
+	todoListDisplayer: () => <ListDisplayer />,
+	todoItemAdder: () => <ItemAdder />,
+}

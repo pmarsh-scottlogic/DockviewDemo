@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import './ItemAdder.scss'
 import { TodoItem } from '../types'
+import { useAppDispatch } from '../reduxHooks'
+import { addTodoItemToList } from '../todoSlice'
 
-function ItemAdder({
-	addTodoItemToList,
-}: {
-	addTodoItemToList: (newItem: TodoItem) => void
-}) {
+function ItemAdder() {
+	const dispatch = useAppDispatch()
+
 	const [title, setTitle] = useState<string>()
 	const [location, setLocation] = useState<string>()
 	const [date, setDate] = useState<Date>()
@@ -19,7 +19,7 @@ function ItemAdder({
 			dueDate: date ?? new Date(0),
 			complete: false,
 		}
-		addTodoItemToList(newItem)
+		dispatch(addTodoItemToList(newItem))
 	}
 
 	return (

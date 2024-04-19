@@ -17,8 +17,6 @@ import {
 } from './Dockview/GroupHeaderControls'
 import { useState } from 'react'
 import { components } from './Dockview/Components'
-import { TodoItem } from './Todolist/types'
-import PLACEHOLDER_TODO_ITEMS from './Todolist/placeholderItems'
 
 const headerComponents = {
 	default: (props: IDockviewPanelHeaderProps) => {
@@ -30,39 +28,7 @@ const headerComponents = {
 	},
 }
 
-export type TodoApi = {
-	todoItems: TodoItem[]
-	toggleTodoItemCompleteness: (title: string) => void
-	addTodoItemToList: (newItem: TodoItem) => void
-}
-
 const App = (props: { theme?: string }) => {
-	// ========== todo list stuff ==========
-	const [todoItems, setTodoItems] = useState<TodoItem[]>(
-		PLACEHOLDER_TODO_ITEMS
-	)
-
-	function toggleTodoItemCompleteness(title: string) {
-		console.log('toggling completeness of ', title)
-		setTodoItems((todoItems) =>
-			todoItems.map((todoItem) =>
-				todoItem.title === title
-					? { ...todoItem, complete: !todoItem.complete }
-					: todoItem
-			)
-		)
-	}
-
-	function addTodoItemToList(newItem: TodoItem) {
-		setTodoItems((todoItems) => [...todoItems, newItem])
-	}
-
-	const todoApi: TodoApi = {
-		todoItems,
-		toggleTodoItemCompleteness,
-		addTodoItemToList,
-	}
-
 	// dockview stuff
 	const [dockviewApi, setDockviewApi] = useState<DockviewApi>()
 
@@ -181,7 +147,7 @@ const App = (props: { theme?: string }) => {
 				}}
 			>
 				<DockviewReact
-					components={components(todoApi)}
+					components={components}
 					defaultTabComponent={headerComponents.default}
 					rightHeaderActionsComponent={RightControls}
 					leftHeaderActionsComponent={LeftControls}

@@ -1,10 +1,9 @@
 import { IDockviewPanelProps } from 'dockview'
 import { components } from './Components'
-import { TodoApi } from '../App'
 
 export default function ComponentChooser(props: IDockviewPanelProps) {
 	const componentsToExclude = ['componentChooser', 'default']
-	const componentsToChoose = Object.keys(components({} as TodoApi)).filter(
+	const componentsToChoose = Object.keys(components).filter(
 		(component) => !componentsToExclude.includes(component)
 	)
 	return (

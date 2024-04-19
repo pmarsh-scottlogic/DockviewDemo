@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Filters, TodoItem, getTodoItemId } from '../types'
 import './ListDisplayer.scss'
 import FilterPanel from './FilterPanel'
+import { useAppDispatch, useAppSelector } from '../reduxHooks'
+import { toggleTodoItemCompleteness } from '../todoSlice'
 
 const Separator = () => <span className="separator">{'|'}</span>
 
@@ -22,13 +24,10 @@ function todoItemShouldBeIncluded(todoItem: TodoItem, filters: Filters) {
 	return correctCompletedness && correctLocation
 }
 
-function ListDisplayer({
-	todoItems,
-	toggleTodoItemCompleteness,
-}: {
-	todoItems: TodoItem[]
-	toggleTodoItemCompleteness: (title: string) => void
-}) {
+function ListDisplayer() {
+	const todoItems = useAppSelector((state) => state.todo.todoItems)
+	const dispatch = useAppDispatch()
+
 	const [showFilters, setShowFilters] = useState(false)
 	const [filters, setFilters] = useState<Filters>({
 		completedness: 'complete or to do',
@@ -48,7 +47,11 @@ function ListDisplayer({
 								type="checkbox"
 								defaultChecked={todoItem.complete}
 								onClick={() =>
-									toggleTodoItemCompleteness(todoItem.title)
+									dispatch(
+										toggleTodoItemCompleteness(
+											todoItem.title
+										)
+									)
 								}
 							/>
 							<span className="title">{todoItem.title}</span>
