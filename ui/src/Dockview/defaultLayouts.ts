@@ -80,4 +80,22 @@ function onePanelConfig(api: DockviewApi) {
 	panel1.api.setActive()
 }
 
-export { onePanelConfig, complexConfig, nextId }
+function todoSyncTest(api: DockviewApi) {
+	const panel1 = api.addPanel({
+		id: 'panel_1',
+		component: 'todoListDisplayer',
+		renderer: 'always',
+		title: 'Panel 1',
+	})
+
+	api.addPanel({
+		id: 'panel8',
+		component: 'todoListDisplayer',
+		title: 'Panel 8',
+		position: { referencePanel: panel1, direction: 'right' },
+	})
+
+	panel1.api.setActive()
+}
+
+export { onePanelConfig, complexConfig, nextId, todoSyncTest }

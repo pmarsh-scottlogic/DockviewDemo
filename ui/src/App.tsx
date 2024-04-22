@@ -6,7 +6,6 @@ import {
 	DockviewApi,
 } from 'dockview'
 import './app.scss'
-import { onePanelConfig } from './Dockview/defaultLayouts'
 import { GlobalActions } from './Dockview/GlobalActions'
 import { PanelActions } from './Dockview/panelActions'
 import { GroupActions } from './Dockview/groupActions'
@@ -17,6 +16,7 @@ import {
 } from './Dockview/GroupHeaderControls'
 import { useState } from 'react'
 import { components } from './Dockview/Components'
+import { todoSyncTest } from './Dockview/defaultLayouts'
 
 const headerComponents = {
 	default: (props: IDockviewPanelHeaderProps) => {
@@ -104,7 +104,7 @@ const App = (props: { theme?: string }) => {
 			return
 		}
 
-		onePanelConfig(event.api)
+		todoSyncTest(event.api)
 		console.log('Dockview state loaded from defaultConfig')
 	}
 
