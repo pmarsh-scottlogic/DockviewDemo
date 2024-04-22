@@ -123,7 +123,7 @@ const App = (props: { theme?: string }) => {
 		>
 			<div>
 				<GlobalActions api={dockviewApi} />
-				{false && ( //hidden for now
+				{true && ( //hidden for now
 					<>
 						<PanelActions
 							api={dockviewApi}
