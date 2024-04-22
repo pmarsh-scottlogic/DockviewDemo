@@ -29,7 +29,6 @@ const headerComponents = {
 }
 
 const App = (props: { theme?: string }) => {
-	// dockview stuff
 	const [dockviewApi, setDockviewApi] = useState<DockviewApi>()
 
 	const [panelIds, setPanelIds] = useState<string[]>([])
@@ -37,19 +36,17 @@ const App = (props: { theme?: string }) => {
 	const [activePanelId, setActivePanelId] = useState<string>()
 	const [activeGroupId, setActiveGroupId] = useState<string>()
 
-	// I thought I could deduce these from the api state object. But they don't stay in sync when the Dock view updates (new panel/group added or deleted or selected)
-	// const panelIds = api?.panels.map((panel) => panel.id) ?? []
-	// const groupIds = api?.groups.map((group) => group.id) ?? []
-	// const activePanelId = api?.activePanel?.id
-	// const activeGroupId = api?.activeGroup?.id
-
 	const onReady = (event: DockviewReadyEvent) => {
 		setDockviewApi(event.api)
 
-		// set event methods here. E.g:
+		function onlyUnique<T>(value: T, index: number, array: T[]) {
+			return array.indexOf(value) === index
+		}
 
 		event.api.onDidAddPanel((event) => {
-			setPanelIds((panelIds) => [...panelIds, event.id])
+			setPanelIds((panelIds) =>
+				[...panelIds, event.id].filter(onlyUnique)
+			)
 		})
 		event.api.onDidActivePanelChange((event) => {
 			setActivePanelId(event?.id)
@@ -67,7 +64,9 @@ const App = (props: { theme?: string }) => {
 		})
 
 		event.api.onDidAddGroup((event) => {
-			setGroupIds((groupIds) => [...groupIds, event.id])
+			setGroupIds((groupIds) =>
+				[...groupIds, event.id].filter(onlyUnique)
+			)
 		})
 
 		event.api.onDidRemoveGroup((event) => {
