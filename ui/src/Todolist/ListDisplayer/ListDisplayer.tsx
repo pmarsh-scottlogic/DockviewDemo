@@ -4,6 +4,7 @@ import './ListDisplayer.scss'
 import FilterPanel from './FilterPanel'
 import { useAppDispatch, useAppSelector } from '../reduxHooks'
 import { toggleTodoItemCompleteness } from '../todoSlice'
+import { DockviewPanelApi } from 'dockview'
 
 const Separator = () => <span className="separator">{'|'}</span>
 
@@ -17,7 +18,8 @@ function todoItemShouldBeIncluded(todoItem: TodoItem, filters: Filters) {
 	return correctCompletedness && correctLocation
 }
 
-function ListDisplayer() {
+function ListDisplayer({ dockPanelApi }: { dockPanelApi: DockviewPanelApi }) {
+	console.log('rerender', dockPanelApi.id)
 	const todoItems = useAppSelector((state) => state.todo.todoItems)
 	const dispatch = useAppDispatch()
 

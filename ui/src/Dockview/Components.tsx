@@ -43,6 +43,8 @@ export const components = {
 			/>
 		)
 	},
-	todoListDisplayer: () => <ListDisplayer />,
+	todoListDisplayer: (props: IDockviewPanelProps) => (
+		<ListDisplayer dockPanelApi={props.api} />
+	),
 	todoItemAdder: () => <ItemAdder />,
 }
