@@ -10,11 +10,10 @@ function getTodoItemId(todoItem: TodoItem) {
 }
 
 type Filters = {
-	completedness: Completedness
+	showToDo: boolean
+	showComplete: boolean
 	location: string
 }
 
-type Completedness = 'complete' | 'to do' | 'complete or to do' | 'neither'
-
-export type { TodoItem, Filters, Completedness }
+export type { TodoItem, Filters }
 export { getTodoItemId }

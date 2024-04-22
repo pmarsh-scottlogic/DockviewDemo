@@ -1,18 +1,5 @@
-import { Completedness, Filters, TodoItem } from '../types'
+import { Filters, TodoItem } from '../types'
 import './FilterPanel.scss'
-
-function determineCompletedness(
-	toDoChecked: boolean,
-	completeChecked: boolean
-): Completedness {
-	return toDoChecked && completeChecked
-		? 'complete or to do'
-		: toDoChecked && !completeChecked
-		? 'to do'
-		: !toDoChecked && completeChecked
-		? 'complete'
-		: 'neither'
-}
 
 function getUniqueEntries<T>(arr: T[]) {
 	return [...new Set(arr)]
@@ -27,12 +14,8 @@ function FilterPanel({
 	setFilters: React.Dispatch<React.SetStateAction<Filters>>
 	todoItems: TodoItem[]
 }) {
-	const todoChecked =
-		filters.completedness === 'to do' ||
-		filters.completedness === 'complete or to do'
-	const completeChecked =
-		filters.completedness === 'complete' ||
-		filters.completedness === 'complete or to do'
+	const todoChecked = filters.showToDo
+	const completeChecked = filters.showComplete
 
 	const locationOptions = ['any'].concat(
 		getUniqueEntries(todoItems.map((todoItem) => todoItem.location))
@@ -42,10 +25,7 @@ function FilterPanel({
 		const todoNowChecked = !todoChecked
 		setFilters((filters) => ({
 			...filters,
-			completedness: determineCompletedness(
-				todoNowChecked,
-				completeChecked
-			),
+			showToDo: todoNowChecked,
 		}))
 	}
 
@@ -53,10 +33,7 @@ function FilterPanel({
 		const completeNowChecked = !completeChecked
 		setFilters((filters) => ({
 			...filters,
-			completedness: determineCompletedness(
-				todoChecked,
-				completeNowChecked
-			),
+			showComplete: completeNowChecked,
 		}))
 	}
 

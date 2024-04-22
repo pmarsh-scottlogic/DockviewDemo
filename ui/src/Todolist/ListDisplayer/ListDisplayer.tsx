@@ -8,16 +8,9 @@ import { toggleTodoItemCompleteness } from '../todoSlice'
 const Separator = () => <span className="separator">{'|'}</span>
 
 function todoItemShouldBeIncluded(todoItem: TodoItem, filters: Filters) {
-	const completeItemsIncluded =
-		filters.completedness === 'complete' ||
-		filters.completedness === 'complete or to do'
-	const todoItemsIncluded =
-		filters.completedness === 'to do' ||
-		filters.completedness === 'complete or to do'
-
 	const correctCompletedness =
-		(completeItemsIncluded && todoItem.complete) ||
-		(todoItemsIncluded && !todoItem.complete)
+		(filters.showComplete && todoItem.complete) ||
+		(filters.showToDo && !todoItem.complete)
 	const correctLocation =
 		filters.location === 'any' || filters.location === todoItem.location
 
@@ -30,7 +23,8 @@ function ListDisplayer() {
 
 	const [showFilters, setShowFilters] = useState(false)
 	const [filters, setFilters] = useState<Filters>({
-		completedness: 'complete or to do',
+		showComplete: true,
+		showToDo: true,
 		location: 'any',
 	})
 
