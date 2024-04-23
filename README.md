@@ -1,3 +1,3 @@
 # DockviewDemo
 
-To get started, go to _/ui_ and run `npm install` followed by `npm run dev`, then navigate to the url given in the console.
+In this project we have a go at using different libraries that allow window docking in react. Each top-level folder is for a different library. See the readmes in each folder
