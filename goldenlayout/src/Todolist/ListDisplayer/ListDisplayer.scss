@@ -1,0 +1,33 @@
+section.listDisplayer {
+	text-align: left;
+
+	ul {
+		padding: 0;
+		list-style-type: none;
+
+		li {
+			display: flex;
+
+			input {
+				margin-right: 0.75rem;
+			}
+
+			.title {
+				font-weight: bold;
+			}
+
+			.separator {
+				margin: 0 0.5rem;
+			}
+
+			.location {
+				font-style: italic;
+				color: grey;
+			}
+
+			.date {
+				color: gray;
+			}
+		}
+	}
+}

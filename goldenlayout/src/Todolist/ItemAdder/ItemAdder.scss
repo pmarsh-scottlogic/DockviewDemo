@@ -1,0 +1,19 @@
+section.itemAdder {
+	text-align: left;
+
+	form {
+		display: flex;
+
+		div.labels,
+		div.inputs {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+		}
+
+		div.labels {
+			margin-right: 1rem;
+		}
+	}
+}
