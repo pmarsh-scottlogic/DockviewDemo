@@ -1,14 +1,51 @@
-import { GoldenLayout } from 'golden-layout'
+import { Layout, Model, TabNode, IJsonModel } from 'flexlayout-react'
+import './App.css'
+import 'flexlayout-react/style/light.css'
 
-const TestComponent = ({ label }: { label: string }) => <h1>{label}</h1>
+const json: IJsonModel = {
+	global: { tabEnableFloat: true },
+	borders: [],
+	layout: {
+		type: 'row',
+		weight: 100,
+		children: [
+			{
+				type: 'tabset',
+				weight: 50,
+				children: [
+					{
+						type: 'tab',
+						name: 'One',
+						component: 'button',
+					},
+				],
+			},
+			{
+				type: 'tabset',
+				weight: 50,
+				children: [
+					{
+						type: 'tab',
+						name: 'Two',
+						component: 'button',
+					},
+				],
+			},
+		],
+	},
+}
 
-myLayout.registerComponent('test-component', TestComponent)
+const model = Model.fromJson(json)
 
-//Once all components are registered, call
-myLayout.init()
+function App() {
+	const factory = (node: TabNode) => {
+		const component = node.getComponent()
+		if (component === 'button') {
+			return <button>{node.getName()}</button>
+		}
+	}
 
-const App = () => {
-	return <>hey</>
+	return <Layout model={model} factory={factory} />
 }
 
 export default App
