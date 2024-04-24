@@ -1,6 +1,8 @@
 import { Layout, Model, TabNode, IJsonModel } from 'flexlayout-react'
 import './App.css'
 import 'flexlayout-react/style/light.css'
+import ListDisplayer from './Todolist/ListDisplayer/ListDisplayer'
+import ItemAdder from './Todolist/ItemAdder/ItemAdder'
 
 const json: IJsonModel = {
 	global: { tabEnableFloat: true },
@@ -10,13 +12,30 @@ const json: IJsonModel = {
 		weight: 100,
 		children: [
 			{
-				type: 'tabset',
+				type: 'row',
 				weight: 50,
 				children: [
 					{
-						type: 'tab',
-						name: 'One',
-						component: 'button',
+						type: 'tabset',
+						weight: 50,
+						children: [
+							{
+								type: 'tab',
+								name: 'yes',
+								component: 'todoDisplay',
+							},
+						],
+					},
+					{
+						type: 'tabset',
+						weight: 50,
+						children: [
+							{
+								type: 'tab',
+								name: 'no',
+								component: 'todoDisplay',
+							},
+						],
 					},
 				],
 			},
@@ -27,7 +46,7 @@ const json: IJsonModel = {
 					{
 						type: 'tab',
 						name: 'Two',
-						component: 'button',
+						component: 'todoAdder',
 					},
 				],
 			},
@@ -40,9 +59,13 @@ const model = Model.fromJson(json)
 function App() {
 	const factory = (node: TabNode) => {
 		const component = node.getComponent()
-		if (component === 'button') {
-			return <button>{node.getName()}</button>
-		}
+		return component === 'todoDisplay' ? (
+			<ListDisplayer />
+		) : component === 'todoAdder' ? (
+			<ItemAdder />
+		) : (
+			<p>{`DevError: the component ${component} was not defined in the factory`}</p>
+		)
 	}
 
 	return <Layout model={model} factory={factory} />
