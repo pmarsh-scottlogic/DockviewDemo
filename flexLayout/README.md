@@ -5,4 +5,4 @@ run with `npm run dev`
 
 # goldenlayout
 
-[website](https://golden-layout.com/) | [github](https://github.com/golden-layout/golden-layout) | [npm](https://www.npmjs.com/package/golden-layout) | [demos](https://golden-layout.com/examples/)
+[website](https://golden-layout.com/) | [github](https://github.com/golden-layout/golden-layout) | [npm](https://www.npmjs.com/package/golden-layout) | [demos](https://golden-layout.com/examples/) | [Typescript starting example](https://github.com/nealus/FlexLayout_cra_example)
