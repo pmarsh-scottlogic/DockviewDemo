@@ -1,43 +1,35 @@
+import DockLayout, { LayoutData } from 'rc-dock'
+import 'rc-dock/dist/rc-dock.css'
+
 function App() {
-	// Create the base state,
-	// and set up initial content
-	const state = Dockable.useDockable((state) => {
-		Dockable.createDockedPanel(
-			state,
-			state.rootPanel,
-			Dockable.DockMode.Full,
-			<Counter />
-		)
-	})
+	const defaultLayout: LayoutData = {
+		dockbox: {
+			mode: 'horizontal',
+			children: [
+				{
+					tabs: [
+						{
+							id: 'tab1',
+							title: 'tab1',
+							content: <div>Hello World</div>,
+						},
+					],
+				},
+			],
+		},
+	}
 
-	// Render the root Container element,
-	// which handles all interactions on your behalf
 	return (
-		<div
+		<DockLayout
+			defaultLayout={defaultLayout}
 			style={{
-				width: '100vw',
-				height: '100vh',
+				position: 'absolute',
+				left: 10,
+				top: 10,
+				right: 10,
+				bottom: 10,
 			}}
-		>
-			<Dockable.Container state={state} />
-		</div>
-	)
-}
-
-// Your custom element!
-function Counter() {
-	const [value, setValue] = React.useState(0)
-	const countUp = () => setValue(value + 1)
-
-	const ctx = Dockable.useContentContext()
-	ctx.setTitle(`Count: ${value}`)
-	ctx.setPreferredSize(300, 250)
-
-	return (
-		<div>
-			{value}
-			<button onClick={countUp}>Count up!</button>
-		</div>
+		/>
 	)
 }
 
