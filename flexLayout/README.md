@@ -3,6 +3,6 @@ made with `npm create vite@latest`: react + typescript.
 To start, run `npm install`
 run with `npm run dev`
 
-# goldenlayout
+# flexlayout
 
-[website](https://golden-layout.com/) | [github](https://github.com/golden-layout/golden-layout) | [npm](https://www.npmjs.com/package/golden-layout) | [demos](https://golden-layout.com/examples/) | [Typescript starting example](https://github.com/nealus/FlexLayout_cra_example)
+[github](https://github.com/caplin/FlexLayout) | [npm](https://www.npmjs.com/package/flexlayout-react) | [demos](https://rawgit.com/caplin/FlexLayout/demos/demos/v0.7/demo/index.html)
