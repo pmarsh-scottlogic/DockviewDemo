@@ -40,13 +40,13 @@ function ListDisplayer() {
 							<input
 								type="checkbox"
 								checked={todoItem.complete}
-								onClick={() =>
+								onChange={() => {
 									dispatch(
 										toggleTodoItemCompleteness(
 											todoItem.title
 										)
 									)
-								}
+								}}
 							/>
 							<span className="title">{todoItem.title}</span>
 							<Separator />
